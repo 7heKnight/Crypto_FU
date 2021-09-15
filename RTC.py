@@ -24,11 +24,6 @@ def getPos(key):
     print()
     return keyTable
 
-def checkEO(number):
-    if number == int(number):
-        return number
-    return False
-
 def insertText(key, plaintext):
     tmpText = ""
     result = []
@@ -45,9 +40,6 @@ def insertText(key, plaintext):
     result.append(tmpText.upper())
     return result
 
-def removeSC(string):
-    return re.sub(fr'[{special_char} ]', '', string)
-
 def checkDupChar(string):
     newString = ""
     for i in string:
@@ -55,19 +47,33 @@ def checkDupChar(string):
             newString += i
     return newString
 
+def checkEO(number):
+    if number == int(number):
+        return number
+    return False
+
+def removeSC(string):
+    return re.sub(fr'[{special_char} ]', '', string)
+
+def removeD(string):
+    return re.sub('\d+', '', string)
+
 if __name__ == '__main__':
     print(f' ====== Row Transposition Cipher ======')
     key = input('[*] Enter your key: ').upper()
+    key = removeD(checkDupChar(key))
     key = removeSC(checkDupChar(key))
     plaintext = input('[*] Enter your plaintext: ').upper()
     plaintext = removeSC(plaintext)
     keyTable = getPos(key)
-    cal = len(plaintext) / len(key)
-    rows = checkEO(cal)
-    if rows == False:
-        rows = int(cal) + 1
     result = insertText(key, plaintext)
-    for i in result:
-        for j in i:
-            print("\t " + j, end="\t")
+    answer = []
+    for i in key:
+        answer.append("")
+    for row in result:
+        for charPos in range(len(row)):
+            answer[charPos] += row[charPos]
+            print("\t " + row[charPos], end="\t")
         print()
+    string = "".join(answer[keyTable.get(i)-1] for i in keyTable)
+    print(f"Answer: {string}")
