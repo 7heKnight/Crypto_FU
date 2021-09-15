@@ -57,11 +57,9 @@ def checkDupChar(string):
 
 if __name__ == '__main__':
     print(f' ====== Row Transposition Cipher ======')
-    # key = input('[*] Enter your key: ').upper()
-    key = "tests"
+    key = input('[*] Enter your key: ').upper()
     key = removeSC(checkDupChar(key))
-    # plaintext = input('[*] Enter your plaintext: ').upper()
-    plaintext = "This is Plaintext for the tests"
+    plaintext = input('[*] Enter your plaintext: ').upper()
     plaintext = removeSC(plaintext)
     keyTable = getPos(key)
     cal = len(plaintext) / len(key)
