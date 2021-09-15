@@ -47,6 +47,11 @@ def checkDupChar(string):
             newString += i
     return newString
 
+def get_input(string):
+    user_input = input(string).upper()
+    user_input = removeSC(user_input)
+    return user_input
+
 def checkEO(number):
     if number == int(number):
         return number
@@ -60,11 +65,9 @@ def removeD(string):
 
 if __name__ == '__main__':
     print(f' ====== Row Transposition Cipher ======')
-    key = input('[*] Enter your key: ').upper()
+    key = get_input('[*] Enter your key: ')
     key = removeD(checkDupChar(key))
-    key = removeSC(checkDupChar(key))
-    plaintext = input('[*] Enter your plaintext: ').upper()
-    plaintext = removeSC(plaintext)
+    plaintext = get_input('[*] Enter your plaintext: ')
     keyTable = getPos(key)
     result = insertText(key, plaintext)
     answer = []
@@ -76,4 +79,4 @@ if __name__ == '__main__':
             print("\t " + row[charPos], end="\t")
         print()
     string = "".join(answer[keyTable.get(i)-1] for i in keyTable)
-    print(f"Answer: {string}")
+    print(f"[+] Answer: {string}")
