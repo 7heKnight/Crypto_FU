@@ -20,7 +20,7 @@ def getPos(key):
                     pos += 1
                     break
     for i in key:
-        print(f"\t{i}-{keyTable.get(i)}", end="\t")
+        print(f"    {i}-{keyTable.get(i)}", end=" ")
     print()
     return keyTable
 
@@ -39,6 +39,23 @@ def insertText(key, plaintext):
     tmpText += alphabet[len(alphabet)-missingText::]
     result.append(tmpText.upper())
     return result
+
+def get_answer(key, result, keyTable):
+    answer = []
+    for i in key:
+        answer.append("")
+    for row in result:
+        for charPos in range(len(row)):
+            answer[charPos] += row[charPos]
+            print("     " + row[charPos], end="  ")
+        print()
+    string = ""
+    for i in keyTable:
+        for j in range(len(key)):
+            if key[j] == i:
+                string += answer[j]
+                break
+    return string
 
 def checkDupChar(string):
     newString = ""
@@ -64,19 +81,10 @@ def removeD(string):
     return re.sub('\d+', '', string)
 
 if __name__ == '__main__':
-    print(f' ====== Row Transposition Cipher ======')
-    key = get_input('[*] Enter your key: ')
-    key = removeD(checkDupChar(key))
+    print(' ============ Row Transposition Cipher ============')
+    key = removeD(checkDupChar(get_input('[*] Enter your key: ')))
     plaintext = get_input('[*] Enter your plaintext: ')
     keyTable = getPos(key)
     result = insertText(key, plaintext)
-    answer = []
-    for i in key:
-        answer.append("")
-    for row in result:
-        for charPos in range(len(row)):
-            answer[charPos] += row[charPos]
-            print("\t " + row[charPos], end="\t")
-        print()
-    string = "".join(answer[keyTable.get(i)-1] for i in keyTable)
+    string = get_answer(key,result, keyTable)
     print(f"[+] Answer: {string}")
