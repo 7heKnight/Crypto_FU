@@ -14,7 +14,7 @@ for i in range(0, 8):
     s[j] = tmp
     print(j)
     print(f"\t=> S = {s}")
-print('-------------------------')
+print('--------------------------------------------')
 
 print('\t>>>>> Key stream <<<<<')
 j = 0
@@ -34,7 +34,7 @@ for k in range(0, len(p)):
     t = (s[i] + s[j]) % 8
     # print(f'>> {key} + {s[t]}')
     key = f"{key} {s[t]}"
-    print("\n >> KeyStream:", key)
-print('-------------------------')
+print(" >> KeyStream:", key)
+print('--------------------------------------------')
 print(">>>>> Encryption <<<<<")
 print(' >> K xor P, xor all and then combine it!')
